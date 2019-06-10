@@ -1,0 +1,20 @@
+{
+  "name": "kitzberger/40x-handler",
+  "type": "typo3-cms-extension",
+  "description": "TYPO3 40x Handler",
+  "homepage": "https://github.com/kitzberger/40x_handler",
+  "license": [
+    "GPL-2.0+"
+  ],
+  "keywords": [
+    "TYPO3 CMS"
+  ],
+  "require": {
+    "typo3/cms-core": ">=7.6.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Kitzberger\\FourOhExHandler\\": "Classes/"
+    }
+  }
+}
