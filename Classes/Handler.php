@@ -25,7 +25,7 @@ class Handler
         if ($param['reasonText'] === 'ID was not an accessible page') {
 	        if (isset($param['pageAccessFailureReasons']['fe_group'])) {
 	            if ($param['pageAccessFailureReasons']['fe_group'] != ['' => 0]) {
-	                $redirect_url = rawurldecode($param["currentUrl"]);
+	                $redirect_url = rawurlencode($param["currentUrl"]);
 
 	                $fe_groups = $param['pageAccessFailureReasons']['fe_group'];
 	                $fe_groups = array_pop($fe_groups);
