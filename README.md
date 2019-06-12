@@ -31,3 +31,26 @@ Here's an example page's "Usergroup Access Rights":
 ![page's Usergroup Access Rights](Documentation/Images/page-usergroup-access-rights.png)
 
 When determining the right 403 page the extension checks for all of the pages fe_groups for which one a 403 page has been configured. The first one found will be taken.
+
+## Trouble shooting
+
+The extension uses TYPO3's logger interface, so by adding this to your configuration (e.g. `AdditionalConfiguration.php`) you can have a look into the program's flow:
+
+```
+$logWriterConf = [
+    // Set log config for namespace \Kitzberger\FourOhExHandler
+    'Kitzberger' => [
+        'FourOhExHandler' => [
+            'writerConfiguration' => [
+                \TYPO3\CMS\Core\Log\LogLevel::DEBUG => [
+                    // logging to a file
+                    \TYPO3\CMS\Core\Log\Writer\FileWriter::class => [
+                        'logFile' => 'typo3temp/logs/40x-handler.log'
+                    ],
+                ],
+            ],
+        ],
+    ],
+];
+$GLOBALS['TYPO3_CONF_VARS']['LOG'] = array_replace_recursive($GLOBALS['TYPO3_CONF_VARS']['LOG'], $logWriterConf);
+```
