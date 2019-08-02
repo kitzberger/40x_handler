@@ -28,7 +28,8 @@ class Handler
 		self::log(LogLevel::INFO, '40x_handler triggered!');
 		self::log(LogLevel::DEBUG, print_r($param, true));
 
-		if ($param['reasonText'] === 'ID was not an accessible page') {
+		if ($param['reasonText'] === 'ID was not an accessible page' ||
+		    $param['reasonText'] === 'Subsection was found and not accessible') {
 			if (isset($param['pageAccessFailureReasons']['fe_group'])) {
 				if ($param['pageAccessFailureReasons']['fe_group'] != ['' => 0]) {
 					$redirect_url = rawurlencode($param["currentUrl"]);
