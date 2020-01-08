@@ -1,6 +1,6 @@
 <?php
 $EM_CONF[$_EXTKEY] = [
-	'title' => '40x Handler',
+	'title' => 'Four0x Handler',
 	'description' => '',
 	'category' => 'system',
 	'state' => 'stable',
