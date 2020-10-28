@@ -26,7 +26,7 @@ class Handler
 	 */
 	public static function pageNotFound($param, $caller)
 	{
-		self::log(LogLevel::INFO, 'four0x_handler triggered!');
+		self::log(LogLevel::INFO, 'fox_handler triggered!');
 		self::log(LogLevel::DEBUG, print_r($param, true));
 
 		if ($param['reasonText'] === 'ID was not an accessible page' ||
