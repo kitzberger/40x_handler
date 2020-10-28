@@ -111,7 +111,7 @@ class Handler
 	protected static function getExtConf()
 	{
 		if (is_null(self::$extConf)) {
-			$extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['four0x_handler']);
+			$extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['fox_handler']);
 		}
 
 		return $extConf;
