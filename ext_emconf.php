@@ -1,7 +1,7 @@
 <?php
 $EM_CONF[$_EXTKEY] = [
 	'title' => 'Fox Handler',
-	'description' => '',
+	'description' => 'This extension provides a pageNotFoundHandler that is able to handle both 404 and 403 responses.',
 	'category' => 'system',
 	'state' => 'stable',
 	'uploadfolder' => 0,
