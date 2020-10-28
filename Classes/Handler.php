@@ -26,7 +26,7 @@ class Handler
 	 */
 	public static function pageNotFound($param, $caller)
 	{
-		self::log(LogLevel::INFO, 'four0x_handler triggered!');
+		self::log(LogLevel::INFO, 'fox_handler triggered!');
 		self::log(LogLevel::DEBUG, print_r($param, true));
 
 		if ($param['reasonText'] === 'ID was not an accessible page' ||
@@ -111,7 +111,7 @@ class Handler
 	protected static function getExtConf()
 	{
 		if (is_null(self::$extConf)) {
-			$extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['four0x_handler']);
+			$extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['fox_handler']);
 		}
 
 		return $extConf;
