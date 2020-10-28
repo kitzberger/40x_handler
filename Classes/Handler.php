@@ -7,6 +7,7 @@ use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
+use TYPO3\CMS\Frontend\Controller\ErrorController;
 use TYPO3\CMS\Core\Log\LogManager;
 use TYPO3\CMS\Core\Log\LogLevel;
 
@@ -20,12 +21,12 @@ class Handler
 	 * ...
 	 *
 	 * @param  array $param
-	 * @param  TypoScriptFrontendController $TypoScriptFrontendController
+	 * @param  TypoScriptFrontendController|ErrorController $caller
 	 * @return void
 	 */
-	public static function pageNotFound($param, TypoScriptFrontendController $TypoScriptFrontendController)
+	public static function pageNotFound($param, $caller)
 	{
-		self::log(LogLevel::INFO, '40x_handler triggered!');
+		self::log(LogLevel::INFO, 'four0x_handler triggered!');
 		self::log(LogLevel::DEBUG, print_r($param, true));
 
 		if ($param['reasonText'] === 'ID was not an accessible page' ||
@@ -110,7 +111,7 @@ class Handler
 	protected static function getExtConf()
 	{
 		if (is_null(self::$extConf)) {
-			$extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['40x_handler']);
+			$extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['four0x_handler']);
 		}
 
 		return $extConf;

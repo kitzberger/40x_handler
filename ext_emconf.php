@@ -1,6 +1,6 @@
 <?php
 $EM_CONF[$_EXTKEY] = [
-	'title' => '40x Handler',
+	'title' => 'Fox Handler',
 	'description' => '',
 	'category' => 'system',
 	'state' => 'stable',
@@ -13,7 +13,7 @@ $EM_CONF[$_EXTKEY] = [
 	'version' => '1.0.3',
 	'constraints' => [
 		'depends' => [
-			'typo3' => '7.6.0-',
+			'typo3' => '7.6.0-8.7.99',
 		],
 		'conflicts' => [],
 		'suggests' => [],

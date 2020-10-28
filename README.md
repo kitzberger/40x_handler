@@ -1,4 +1,4 @@
-# TYPO3 Extension 40x_handler
+# TYPO3 Extension four0x_handler
 
 This extension provides a `pageNotFoundHandler` that is able to handle both 404 and 403 responses.
 
@@ -45,7 +45,7 @@ $logWriterConf = [
                 \TYPO3\CMS\Core\Log\LogLevel::DEBUG => [
                     // logging to a file
                     \TYPO3\CMS\Core\Log\Writer\FileWriter::class => [
-                        'logFile' => 'typo3temp/logs/40x-handler.log'
+                        'logFile' => 'typo3temp/logs/four0x-handler.log'
                     ],
                 ],
             ],

@@ -1,8 +1,8 @@
 {
-  "name": "kitzberger/40x-handler",
+  "name": "kitzberger/fox-handler",
   "type": "typo3-cms-extension",
-  "description": "TYPO3 40x Handler",
-  "homepage": "https://github.com/kitzberger/40x_handler",
+  "description": "TYPO3 Fox Handler",
+  "homepage": "https://github.com/kitzberger/fox_handler",
   "license": [
     "GPL-2.0+"
   ],
@@ -10,7 +10,7 @@
     "TYPO3 CMS"
   ],
   "require": {
-    "typo3/cms-core": ">=7.6.0"
+    "typo3/cms-core": "^7.6 || ^8.7"
   },
   "autoload": {
     "psr-4": {
