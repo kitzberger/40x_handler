@@ -11,22 +11,22 @@ use TYPO3\CMS\Frontend\Controller\ErrorController;
 use TYPO3\CMS\Core\Log\LogManager;
 use TYPO3\CMS\Core\Log\LogLevel;
 
-class Handler
+class LegacyHandler
 {
 	static $extConf = null;
 
 	static $logger = null;
 
-	/**
-	 * ...
-	 *
-	 * @param  array $param
-	 * @param  TypoScriptFrontendController|ErrorController $caller
-	 * @return void
-	 */
+    /**
+     * Legacy error handler (registered as pageNotFound_handling)
+     *
+     * @param  array $param
+     * @param  TypoScriptFrontendController|ErrorController $caller
+     * @return void
+     */
 	public static function pageNotFound($param, $caller)
 	{
-		self::log(LogLevel::INFO, 'fox_handler triggered!');
+		self::log(LogLevel::INFO, 'fox_handler (legacy) triggered!');
 		self::log(LogLevel::DEBUG, print_r($param, true));
 
 		if ($param['reasonText'] === 'ID was not an accessible page' ||
