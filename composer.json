@@ -4,7 +4,7 @@
   "description": "TYPO3 Fox Handler",
   "homepage": "https://github.com/kitzberger/fox_handler",
   "license": [
-    "GPL-2.0+"
+    "GPL-2.0-or-later"
   ],
   "keywords": [
     "TYPO3 CMS"
@@ -15,6 +15,11 @@
   "autoload": {
     "psr-4": {
       "Kitzberger\\FourOhExHandler\\": "Classes/"
+    }
+  },
+  "extra": {
+    "typo3/cms": {
+      "extension-key": "fox_handler"
     }
   }
 }
