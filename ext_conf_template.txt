@@ -1,5 +1,2 @@
-  # cat=basic; type=string; label=404 page
-404_page =
-
   # cat=basic; type=string; label=403 pages: single pid or comma separated mapping of fe_group uids to page uids (e.g. 1=xxx,2=xxy)
 403_pages =

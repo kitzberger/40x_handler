@@ -1,6 +1,6 @@
 # TYPO3 Extension fox\_handler
 
-This extension provides a handler for page access errors (formerly known as `pageNotFoundHandler`) that is able to handle both 404 and 403 responses.
+This extension provides a handler for page access errors (formerly known as `pageNotFoundHandler`) that is able to handle 403 responses.
 
 ## Installation
 
@@ -10,17 +10,6 @@ This extension provides a handler for page access errors (formerly known as `pag
 
 In the site configuration mask you need to setup a PHP error handler pointing to `Kitzberger\FourOhExHandler\ErrorHandler` and set the 404 respective 403 page(s):
 ![site configuration mask](Documentation/Images/site-configuration.png)
-
-#### Without site configurations (legacy)
-
-In the extensions configuration mask there's two inputs to set the 404 respective 403 page(s):
-![extension configuration mask](Documentation/Images/extension-configuration.png)
-
-Drawback: you cannot configure different settings for a multi-tree scenario where you've got more than one site within your TYPO3 instance.
-
-### 404 page
-
-Set it to a page's uid. That page will be fetched and shown to the user whenever a real 404 is being triggered.
 
 ### 403 pages
 

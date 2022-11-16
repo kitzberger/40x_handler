@@ -7,12 +7,12 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
 use TYPO3\CMS\Core\Error\PageErrorHandler\PageErrorHandlerInterface;
+use TYPO3\CMS\Core\Error\PageErrorHandler\PageErrorHandlerNotConfiguredException;
 use TYPO3\CMS\Core\Http\RedirectResponse;
 use TYPO3\CMS\Core\Log\LogLevel;
+use TYPO3\CMS\Core\Site\Entity\Site;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
-use TYPO3\CMS\Frontend\Controller\ErrorController;
-use TYPO3\CMS\Frontend\Page\PageAccessFailureReasons;
 
 class ErrorHandler implements PageErrorHandlerInterface, LoggerAwareInterface
 {
@@ -71,26 +71,21 @@ class ErrorHandler implements PageErrorHandlerInterface, LoggerAwareInterface
             }
         }
 
-        // fallback
-        return $this->handle404($request);
-    }
-
-    protected function handle404(ServerRequestInterface $request): ResponseInterface
-    {
-        if ($pid = $this->getPageUid_404()) {
-            if (is_numeric($pid)) {
-                $url = 'index.php?id=' . $pid;
-                $this->log(LogLevel::INFO, 'Redirecting to 404 page: ' . $url);
-                return GeneralUtility::makeInstance(ErrorController::class)->pageNotFoundAction(
-                    $request,
-                    'The requested page does not exist',
-                    ['code' => PageAccessFailureReasons::PAGE_NOT_FOUND]
-                );
-            } else {
-                die('Unhandled case for 404 setting! TODO: implement something ;-)');
+        // Fallback to configured 404 handler
+        $this->log(LogLevel::INFO, 'Fallback to 404 handler');
+        $site = $request->getAttribute('site');
+        if ($site instanceof Site) {
+            try {
+                $errorHandler = $site->getErrorHandler(404);
+                if ($errorHandler instanceof PageErrorHandlerInterface) {
+                    return $errorHandler->handlePageError($request, $message, $reasons);
+                }
+            } catch (PageErrorHandlerNotConfiguredException $e) {
+                // No error handler found, so fallback back to the generic TYPO3 error handler.
             }
         }
-        die('Undefined 404 setting! TODO: implement something ;-)');
+
+        throw new \Exception('Somethings really wrong!');
     }
 
     protected function handle403(string $login_url, int $status = 307): ResponseInterface
@@ -98,24 +93,6 @@ class ErrorHandler implements PageErrorHandlerInterface, LoggerAwareInterface
         $this->log(LogLevel::INFO, 'Redirecting to 403 page: ' . $login_url);
 
         return new RedirectResponse($login_url, $status);
-    }
-
-    protected function getPageUid_404()
-    {
-        $page404 = null;
-
-        // Read setting from extension configuration
-        if (isset($this->getExtConf()['404_page'])) {
-            $page404 = $this->getExtConf()['404_page'];
-            $this->log(LogLevel::DEBUG, 'Read 404 settings from extension configuration: ' . $page404);
-        }
-        // Override with setting from site configuration (if given)
-        if (isset($this->errorHandlerConfiguration['404_page'])) {
-            $page404 = $this->errorHandlerConfiguration['404_page'];
-            $this->log(LogLevel::DEBUG, 'Override 404 settings via site configuration: ' . $page404);
-        }
-
-        return $page404 ?: 1;
     }
 
     protected function getPageUid_403($fe_group)
@@ -130,7 +107,7 @@ class ErrorHandler implements PageErrorHandlerInterface, LoggerAwareInterface
         // Override with setting from site configuration (if given)
         if (isset($this->errorHandlerConfiguration['403_pages'])) {
             $page403 = $this->errorHandlerConfiguration['403_pages'];
-            $this->log(LogLevel::DEBUG, 'Override 404 settings via site configuration: ' . $page403);
+            $this->log(LogLevel::DEBUG, 'Override 403 settings via site configuration: ' . $page403);
         }
 
         if ($page403) {
